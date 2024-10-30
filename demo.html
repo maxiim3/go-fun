@@ -1,0 +1,620 @@
+{% load static i18n emails_template_utils humanize %}
+{% load widget_tweaks %}
+{% load program_utils_tags %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type" />
+        {% block title %}<title>{{ subject }}</title>{% endblock %}
+        <!--[if mso]>
+        <xml>
+          <o:OfficeDocumentSettings>
+          <o:AllowPNG/>
+          <o:PixelsPerInch>96</o:PixelsPerInch>
+          </o:OfficeDocumentSettings>
+        </xml>
+        <![endif]-->
+        <style type="text/css">
+            html, body{ margin:0; padding:0;  }
+            table{ margin-top: 0px !important; padding-top: 0px !important; }
+            [office365] button{ margin:0 !important; padding:0 !important; display:block !important; }
+            [office365] div{ margin:0 !important; padding:0 !important; display:block !important; }
+            .mi-all{ display: block; }
+            .mi-desktop{ display: block; }
+            .mi-mobile{
+            display: none;
+            font-size: 0;
+            line-height: 0;
+            padding: 0;
+            float: left;
+            overflow: hidden;
+            mso-hide: all; /* hide elements in Outlook 2007-2013 */
+            }
+            div, p, a, li, td { -webkit-text-size-adjust:none; }
+            @media only screen and (max-device-width: 480px), screen and (max-width: 480px), screen and (orientation: landscape) and (max-width: 630px) {
+                /* very important! all except 'all' and this current type get a display:none; */
+                .mi-desktop{ display: none !important; }
+                /* then show the mobile one */
+                .mi-mobile{
+                    display: block !important;
+                    font-size: 12px !important;
+                    max-height: none !important;
+                    line-height: 1.5 !important;
+                    float: none !important;
+                    overflow: visible !important;
+                }
+            }
+        </style>
+    </head>
+    <body style="font-family: sans-serif; margin-top: 0px !important; padding-top: 0px !important;" bgcolor="#d5d5d5">
+        <table align="center" cellpadding="0" cellspacing="0" width="100%" style="background-color: #d5d5d5; border: 0; border-collapse: collapse; border-spacing: 0; margin: 0px 0 0; padding: 0" bgcolor="#d5d5d5">
+            <tr align="center" style="border: 0; border-collapse: collapse; border-spacing: 0">
+                <td align="center" valign="top" style="border: 0; border-collapse: collapse; border-spacing: 0">
+                    <div class="all" style="">
+                        <table width="600" class="mi-all" align="center" cellspacing="0" cellpadding="0" border="0" style="border: 0; border-collapse: collapse; border-spacing: 0; display: block; margin: 0px 0 0; min-width: 600px; padding: 0px 0 0">
+                            <tbody>
+                                <tr align="left" style="border: 0; border-collapse: collapse; border-spacing: 0">
+                                    <td height="10" width="600" valign="top" align="left" style="line-height: 10px; mso-line-height-rule: exactly;"> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table bgcolor="#ffffff" width="600" class="all" align="center" cellspacing="0" cellpadding="0" border="0" style="border: 0; border-collapse: collapse; border-spacing: 0; margin: 0; min-width: 600px; padding: 0;background-color:#ffffff">
+                            <tbody>
+                                <tr align="left" style="border: 0; border-collapse: collapse; border-spacing: 0">
+                                    <td colspan="3" height="61" align="center" valign="middle" style="width: 600px;height:61px">
+                                        <a href="{{ origin }}{% url 'program:home' %}">
+                                            <img width="191" height="51" border="0" src="{{ origin }}{% static 'images/logo-footer.png' %}" style="border: 0; display: block;line-height: 0;width: 191px;height: 51px" alt="" />
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr align="left" style="border:0;border-collapse:collapse;border-spacing:0;background-color: #f5f7fa">
+                                    <td align="left" valign="top" style="width:29px;line-height:0;max-width:29px;min-width:29px;"></td>
+                                    <td align="left" valign="top">
+                                        <table align="center" cellspacing="0" cellpadding="0" border="0" style="border:0;border-collapse:collapse;border-spacing:0;margin:0;min-width:542px;padding:0;">
+                                            <tbody>
+                                                <tr align="left" style="border:0;border-collapse:collapse;border-spacing:0;">
+                                                    <td align="left" valign="middle" style="height:30px;width:329px;line-height:30px;max-height:30px;max-width:329px;min-height:30px;min-width:329px;font-size:28px;font-family:Arial, sans-serif;font-weight:bold;color:#000000;">
+                                                        <img width="274" height="96" border="0" src="{{ origin }}{% static 'images/michelin-pro-business-program.png' %}" style="border: 0; display: block;line-height: 0;width: 274px;height:96px" alt="" />
+                                                    </td>
+                                                    <td align="left" valign="top" style="width:213px;line-height:13px;max-width:213px;min-width:213px;font-size:12px;font-family:Arial, sans-serif;">
+                                                        <table align="center" cellspacing="0" cellpadding="0" border="0" style="border:0;border-collapse:collapse;border-spacing:0;margin:0;min-width:213px;padding:0;">
+                                                            <tbody>
+                                                                <tr align="left" style="border:0;border-collapse:collapse;border-spacing:0;">
+                                                                    <td align="left" valign="top">
+                                                                        <table align="center" cellspacing="0" cellpadding="0" border="0" style="border:0;border-collapse:collapse;border-spacing:0;margin:0;min-width:10px;padding:0;">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td height="10" style="height: 10px;"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td width="8" height="105" align="left" valign="top" style="border-left:2px solid #e4e7ee;height: 105px; width: 8px;"></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td height="10" style="height: 10px;"></td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                    <td align="left" valign="top">
+                                                                        <table align="center" cellspacing="0" cellpadding="0" border="0" style="border:0;border-collapse:collapse;border-spacing:0;margin:0;min-width:203px;padding:0;">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td height="15" style="height: 15px;"></td>
+                                                                                </tr>
+                                                                                <tr align="left" style="border:0;border-collapse:collapse;border-spacing:0;">
+                                                                                    <td colspan="3" style="width:203px;line-height:18px;max-width:203px;min-width:203px;font-size:13px;font-family:Arial, sans-serif;color:#27509b;font-weight: bold">{{ target.company.name }}
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr align="left" style="border:0;border-collapse:collapse;border-spacing:0;">
+                                                                                    <td colspan="3" style="width:203px;line-height:18px;max-width:203px;min-width:203px;font-size:13px;font-family:Arial, sans-serif;color:#27509b;font-weight: bold">{{ target.member.fullname }}</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td height="10" style="height: 10px;"></td>
+                                                                                </tr>
+                                                                                <tr align="left" style="border:0;border-collapse:collapse;border-spacing:0;">
+                                                                                    <td align="left" valign="middle" width="25" height="21" style="width:25px;height:21px;min-height:21px;max-height:21px;line-height:21px;max-width:25px;min-width:25px;font-size:11px;font-family:Arial, sans-serif;">
+                                                                                        <a href="{{ origin }}{% url 'program:account-landing' %}" style="display:block;font-size:11px;line-height:20px;height:20px;min-height:20px;max-height:20px;vertical-align:middle;color:#117281;text-decoration:none;"><img width="20" height="20" src="{{ origin }}{% static 'images/email/account.png' %}" alt="Mes données personnelles"/></a>
+                                                                                    </td>
+                                                                                    <td align="left" valign="middle" height="21" style="width:148px;height:21px;min-height:21px;max-height:21px;line-height:21px;max-width:148px;min-width:148px;font-size:11px;font-family:Arial, sans-serif;color:#117281;">
+                                                                                        <a href="{{ origin }}{% url 'program:account-landing' %}" style="display:block;font-size:11px;line-height:21px;height:21px;min-height:21px;max-height:21px;vertical-align:middle;color:#797da3;text-decoration:underline;">Mes données personnelles</a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td height="10" style="height: 10px;"></td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td align="left" valign="top" style="width:29px;line-height:0;max-width:29px;min-width:29px;"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table bgcolor="#ffffff" width="600" class="all" align="center" cellspacing="0" cellpadding="0" border="0" style="border: 0; border-collapse: collapse; border-spacing: 0; margin: 0; min-width: 600px; padding: 0;background-color:#ffffff">
+                            <tbody>
+                                <tr align="left" style="border: 0; border-collapse: collapse; border-spacing: 0">
+                                    <td>
+                                        <img width="600" height="225" src="{{ origin }}{% get_image 'header-newsletter-avril-2024' %}" style="display:block; width: 600px; height: 225px;" alt="Votre newsletter du mois d'avril 2024">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table bgcolor="#ffffff" width="600" class="all" align="center" cellspacing="0" cellpadding="0" border="0" style="border: 0; border-collapse: collapse; border-spacing: 0; margin: 0; min-width: 600px; padding: 0;background-color:#ffffff">
+                            <tbody>
+                                <tr align="left" style="border: 0; border-collapse: collapse; border-spacing: 0">
+                                    <td>
+                                        <table cellspacing="0" cellpadding="0" border="0" style="border: 0; border-collapse: collapse; border-spacing: 0; min-width: 600px">
+                                            <tbody>
+                                                <tr style="border: 0; border-collapse: collapse; border-spacing: 0">
+                                                    <td width="30" style="width: 30px;"></td>
+                                                    <td width="540" style="width: 540px;">
+                                                        <table width="540" border="0" cellpadding="0" cellspacing="0" style="border: 0; border-collapse: collapse; border-spacing: 0; min-width: 540px">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td height="30" style="height: 30px"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td align="left" style="font-family: helvetica, arial, sans-serif; font-size: 14px; line-height:20px; color: #000000">
+                                                                        Cher Adhérent,
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td height="15" style="height: 15px"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td align="left" style="font-family: helvetica, arial, sans-serif; font-size: 14px; line-height:20px; color: #000000">
+                                                                        Découvrez les actions, innovations et nouveautés proposées par le Groupe Michelin pour améliorer la performance de ses équipements et vous accompagner dans l’animation de vos ventes de pneumatiques.
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td height="15" style="height: 15px"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td align="left" style="font-family: helvetica, arial, sans-serif; font-size: 14px; line-height:20px; color: #000000">
+                                                                        Vos points <span style='font-style: italic;'><span style='font-weight:bold;'>MICHELIN </span>PRO BUSINESS</span> 2024 sont utilisables jusqu'au 28 février 2025.
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td height="15" style="height: 15px"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td align="left" style="font-family: helvetica, arial, sans-serif; font-size: 14px; line-height:20px; color: #000000">
+                                                                        Bonne lecture !
+                                                                    </td>
+                                                                </tr>
+                                                                {% if contract_context.available_points >= 1 %}
+                                                                    <tr>
+                                                                        <td height="30" style="height: 30px"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <table align="center" cellspacing="0" cellpadding="0" border="0" bgcolor="#f5f7fa" style="background-color:#f5f7fa; border: 0; border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;">
+                                                                                <tr>
+                                                                                    <td>
+                                                                                        <table align="center" cellspacing="0" cellpadding="0" border="0" bgcolor="#f5f7fa" style="min-width: 540px;background-color:#f5f7fa; border: 0; border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;">
+                                                                                            <tr>
+                                                                                                <td align="center" width="320" height="150" valign="middle" style="vertical-align: middle; text-align: center; width: 320px; height: 150px;font-family: helvetica, arial, sans-serif; font-size: 14px; line-height:20px; color: #27509b">
+                                                                                                    Votre solde de points* est de :<br/><br/>
+                                                                                                    <span style="font-weight: bold; font-size: 45px; font-style: italic">{{ contract_context.available_points|intcomma }}</span> <span style="font-size: 25px; color: #27509b; font-style: italic">point{% if contract_context.available_points > 1 %}s{% endif %}</span>
+                                                                                                </td>
+                                                                                                <td width="220" height="150" valign="middle" style="vertical-align: middle; width: 220px; height: 150px;">
+                                                                                                    <table align="center" cellspacing="0" cellpadding="0" border="0" style="border: 0; border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;">
+                                                                                                        <tr>
+                                                                                                            <td align="center" width="200" height="44" bgcolor="#fce500" style="width: 200px; height: 44px; background-color: #fce500; text-align: center">
+                                                                                                                <a href="{{ origin }}{% url 'program:list-movements' %}" style="display:block;text-decoration:none;font-size: 14px;line-height:44px;color:#000000;font-family:Arial, sans-serif;text-align: center;">J’accède à mon compte</a>
+                                                                                                            </td>
+                                                                                                        </tr>
+                                                                                                    </table>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </table>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td align="left" style="vertical-align: middle; width: 540px;font-family: helvetica, arial, sans-serif; font-size: 11px; line-height:15px; color: #27509b;">
+                                                                            * Points valables jusqu'au {{ contract_context.expiration_date|date:"d F Y" }} à {{ contract_context.expiration_date|date:"H:i" }}, profitez-en dans la
+                                                                            <a href="{{ origin }}{% url 'shop:homepage' %}" style="text-decoration:underline; color: #27509b">boutique</a> dès à présent.
+                                                                        </td>
+                                                                    </tr>
+                                                                {% endif %}
+                                                                <tr>
+                                                                    <td height="30" style="height: 30px"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td align="left" style="font-family: helvetica, arial, sans-serif; font-size: 20px; line-height:21px; color: #27509b; font-weight: bold;">
+                                                                        Les actus du Groupe Michelin
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td height="20" style="height: 20px; border-bottom: 1px solid #dcdde7"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td height="30" style="height: 30px"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td align="left" style="font-family: helvetica, arial, sans-serif; font-size: 15px; line-height:21px; color: #27509b; font-weight: bold;">
+                                                                       UN PAS VERS LA LUNE POUR MICHELIN
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td height="15" style="height: 15px"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <table align="center" cellspacing="0" cellpadding="0" border="0" colspan="3" style="border: 0; border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;">
+                                                                            <tr>
+                                                                                <td width="240" style="whidth:240px">
+                                                                                    <a href="{% get_article_url 1 56 %}" style="width: 240px; height: 176px;">
+                                                                                        <img width="240" height="176" src="{{ origin }}{% get_image '2024-04-newsletter-top100' %}" alt="UN PAS VERS LA LUNE POUR MICHELIN" style="display: block; width: 240px; height: 176px;line-height: 15px;font-size: 12px;">
+                                                                                    </a>
+                                                                                </td>
+                                                                                <td width="30" style="width: 30px;"></td>
+                                                                                <td width="270" valign="top" style="vertical-align: top; width: 270px; font-family: helvetica, arial, sans-serif; font-size: 14px; line-height:20px; color: #27509b">
+                                                                                  La NASA a récemment annoncé que l'équipe Moon RACER, dont Michelin fait partie, a été sélectionnée pour l'étude de faisabilité de la phase 1 du projet ARTEMIS.
+                                                                                    <br/> <a href="{% get_article_url 1 56%}" style="font-size: 14px;line-height:44px;color:#27509b;font-family:Arial, sans-serif;"><span style="text-decoration: underline">Lire la suite</span> <span style="color: #fce500;">▸</span></a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td height="29" style="height: 29px; border-bottom: 1px solid #dcdde7"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td height="30" style="height: 30px"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td align="left" style="font-family: helvetica, arial, sans-serif; font-size: 15px; line-height:21px; color: #27509b; font-weight: bold;">
+                                                                        MICHELIN « Elu service client de l’année 2024 » en France
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td height="15" style="height: 15px"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <table align="center" cellspacing="0" cellpadding="0" border="0" colspan="3" style="border: 0; border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;">
+                                                                            <tr>
+                                                                                <td align="center" width="240" style="whidth:240px" >
+                                                                                    <a href="{% get_article_url 1 57 %}" style="width: 240px; height: 176px;">
+                                                                                         <img width="240" height="176" src="{{ origin }}{% get_image '2024-04-newsletter-eluserviceclient' %}" alt="MICHELIN « Elu service client de l’année 2024 » en France" style="display: block; width: 240px; height: 176px;line-height: 15px;font-size: 12px;">
+                                                                                    </a>
+                                                                                </td>
+                                                                                <td width="30" style="width: 30px;"></td>
+                                                                                <td width="270" valign="top" style="vertical-align: top; width: 270px; font-family: helvetica, arial, sans-serif; font-size: 14px; line-height:20px; color: #27509b">
+                                                                                    MICHELIN est Elu Service Client de l’année dans la catégorie Manufacturier pneumatique pour la 4ième fois en France. Avec une note de 16,61, (en constante progression depuis les débuts de sa participation au concours), l’entreprise réalise une très belle performance puisqu’elle gagne dans sa catégorie devant le 2ième participant qui obtient une note de 9,31.
+                                                                                    <br/> <a href="{% get_article_url 1 57 %}" style="font-size: 14px;line-height:44px;color:#27509b;font-family:Arial, sans-serif;"><span style="text-decoration: underline">Lire la suite</span> <span style="color: #fce500;">▸</span></a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td height="29" style="height: 29px; border-bottom: 1px solid #dcdde7"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td height="30" style="height: 30px"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td align="left" style="font-family: helvetica, arial, sans-serif; font-size: 15px; line-height:21px; color: #27509b; font-weight: bold;">
+                                                                        Le Guide MICHELIN crée une distinction pour sa sélection hôtelière : la Clef MICHELIN
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td height="15" style="height: 15px"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <table align="center" cellspacing="0" cellpadding="0" border="0" colspan="3" style="border: 0; border-collapse: collapse; border-spacing: 0; margin: 0; padding: 0;">
+                                                                            <tr>
+                                                                                <td width="240" style="whidth:240px">
+                                                                                    <a href="{% get_article_url 1 58 %}" style="width: 240px; height: 176px;">
+                                                                                        <img width="240" height="176" src="{{ origin }}{% get_image '2024-04-newsletter-cle_michelin' %}" alt="Le Guide MICHELIN crée une distinction pour sa sélection hôtelière : la Clef MICHELIN" style="display: block; width: 240px; height: 176px;line-height: 15px;font-size: 12px;">                                                                                    </a>
+                                                                                </td>
+                                                                                <td width="30" style="width: 30px;"></td>
+                                                                                <td width="270" valign="top" style="vertical-align: top; width: 270px; font-family: helvetica, arial, sans-serif; font-size: 14px; line-height:20px; color: #27509b">
+                                                                                    Les équipes du Guide MICHELIN ont sélectionné plus de 5 000 hôtels et hébergements à travers le monde. Pour mettre en lumière les établissements proposant des expériences hôtelières et de voyage exceptionnelles, le Guide MICHELIN dévoile la Clef MICHELIN, une distinction spéciale qui sera mise en place à partir de 2024.
+                                                                                    <br/> <a href="{% get_article_url 1 58 %}" style="font-size: 14px;line-height:44px;color:#27509b;font-family:Arial, sans-serif;"><span style="text-decoration: underline">Lire la suite</span> <span style="color: #fce500;">▸</span></a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+
+
+
+
+
+                                                                <tr>
+                                                                    <td height="30" style="height: 30px"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td align="left" style="font-family: helvetica, arial, sans-serif; font-size: 20px; line-height:21px; color: #27509b; font-weight: bold;">
+                                                                        Instants de partage et de convivialité
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td height="20" style="height: 20px; border-bottom: 1px solid #dcdde7"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td height="15" style="height: 15px"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td align="left" style="font-family: helvetica, arial, sans-serif; font-size: 14px; line-height:20px; color: #27509b">
+                                                                        Un grand merci aux gagnants de la Galette des Rois 2024 de nous avoir partagé en images leur moment de convivialité. Nous avons hâte de vous compter parmi nos participants aux prochaines animations.
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td height="15" style="height: 15px"></td>
+                                                                </tr>
+                                                                <tr align="left" style="border: 0; border-collapse: collapse; border-spacing: 0">
+                                                                    <td>
+                                                                        <img width="540" height="147" src="{{ origin }}{% get_image 'galette-2024' %}" style="display:block; width: 540px; height: 147px;" alt="Gagnants de la Galette des Rois">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td height="15" style="height: 15px"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td height="20" style="height: 20px; border-bottom: 1px solid #dcdde7"></td>
+                                                                </tr>
+
+
+                                            {% if not target.member.active %}
+                                            <tr>
+                                                <td height="15" style="height: 15px"></td>
+                                            </tr>
+                                            <tr>
+                                                <td align="left" style="font-family: helvetica, arial, sans-serif; font-size: 14px; line-height:16px; color: #000000">
+                                                    Si vous n’êtes pas encore activé au programme, merci de cliquer sur
+                                                    <a href="{{ origin }}{{ contract_context.activation_url }}">ce lien</a>
+                                                    .
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="15" style="height: 15px"></td>
+                                            </tr>
+                                            {% endif %}
+                                            <tr>
+                                                <td height="30" style="height: 30px"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td style="min-width: 30px" width="30"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+                <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" class="all" style="border: 0; border-collapse: collapse; border-spacing: 0; margin: 0; min-width: 600px; padding: 0;background-color:#ffffff" width="600">
+                    <tbody>
+                    <tr align="left" style="border: 0; border-collapse: collapse; border-spacing: 0">
+                        <td align="center" height="44" style="width: 600px;height: 44px;line-height: 11px;vertical-align: middle;" valign="middle" width="288">
+                            <img alt="Entre nous c'est pro" height="11" src="{{ origin }}{% get_image 'logo-c-pro' %}" style="width:194px;height:11px;display: block;" width="194"/>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table align="center" bgcolor="#f5f7fa" border="0" cellpadding="0" cellspacing="0" class="all" style="border: 0; border-collapse: collapse; border-spacing: 0; margin: 0; min-width: 600px; padding: 0;background-color:#f5f7fa" width="600">
+                    <tbody>
+                    <tr align="left" style="border:0;border-collapse:collapse;border-spacing:0;">
+                        <td align="center" style="width:600px;" valign="top">
+                            <table border="0" cellpadding="0" cellspacing="0" style="border:0;border-collapse:collapse;border-spacing:0;margin-top:0px !important;min-width:600px;padding-top:0px !important;">
+                                <tbody>
+                                <tr style="border:0;border-collapse:collapse;border-spacing:0;">
+                                    <td align="left" style=" width: 31px" valign="top" width="31"></td>
+                                    <td align="left" style="width:178px;" valign="top" width="178">
+                                        <a href="{{ origin }}{% url 'program:program' %}" style="display: block;width:178px">
+                                            <img alt="Programme" height="122" src="{{ origin }}{% get_image 'logo-programme-fr' %}" style="width:178px; height:122px;display: block; line-height:15px" width="178"/>
+                                        </a>
+                                    </td>
+                                    <td align="center" style="width:2px;" valign="top">
+                                        <table border="0" cellpadding="0" cellspacing="0" style="border:0;border-collapse:collapse;border-spacing:0;margin-top:0px !important;min-width:2px;padding-top:0px !important;">
+                                            <tbody>
+                                            <tr style="border:0;border-collapse:collapse;border-spacing:0;">
+                                                <td height="16" style="height: 16px;"></td>
+                                            </tr>
+                                            <tr style="border:0;border-collapse:collapse;border-spacing:0;">
+                                                <td height="90" style="height:90px;width:2px;border-left: 2px solid #E3E5ED;"></td>
+                                            </tr>
+                                            <tr style="border:0;border-collapse:collapse;border-spacing:0;">
+                                                <td height="16" style="height: 16px;"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td align="center" style="width:178px;" valign="top" width="178">
+                                        <a href="{{ origin }}{% url 'shop:homepage' %}" style="display: block;width:178px">
+                                            <img alt="Boutique" height="122" src="{{ origin }}{% get_image 'logo-shop-fr' %}" style="width:178px; height:122px;display: block; line-height:15px" width="178"/>
+                                        </a>
+                                    </td>
+                                    <td align="center" style="width:2px;" valign="top">
+                                        <table border="0" cellpadding="0" cellspacing="0" style="border:0;border-collapse:collapse;border-spacing:0;margin-top:0px !important;min-width:2px;padding-top:0px !important;">
+                                            <tbody>
+                                            <tr style="border:0;border-collapse:collapse;border-spacing:0;">
+                                                <td height="16" style="height: 16px;"></td>
+                                            </tr>
+                                            <tr style="border:0;border-collapse:collapse;border-spacing:0;">
+                                                <td height="90" style="height:90px;width:2px;border-left: 2px solid #E3E5ED;"></td>
+                                            </tr>
+                                            <tr style="border:0;border-collapse:collapse;border-spacing:0;">
+                                                <td height="16" style="height: 16px;"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td align="center" style="width:178px;" valign="top" width="178">
+                                        <a href="{{ origin }}{% url 'program:account-landing' %}" style="display: block;width:178px">
+                                            <img alt="Mon compte" height="122" src="{{ origin }}{% get_image 'logo-account-fr' %}" style="width:178px; height:122px;display: block; line-height:15px" width="178"/>
+                                        </a>
+                                    </td>
+                                    <td align="left" style=" width: 31px" valign="top" width="31"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table align="center" bgcolor="#27509b" border="0" cellpadding="0" cellspacing="0" class="all" style="border: 0; border-collapse: collapse; border-spacing: 0; margin: 0; min-width: 600px; padding: 0;background-color:#27509b" width="600">
+                    <tbody>
+                    <tr style="border:0;border-collapse:collapse;border-spacing:0;">
+                        <td align="left" style=" width: 68px" valign="top" width="68"></td>
+                        <td align="center" style="width:464px;" valign="top">
+                            <table border="0" cellpadding="0" cellspacing="0" style="border:0;border-collapse:collapse;border-spacing:0;margin-top:0px !important;min-width:464px;padding-top:0px !important;">
+                                <tbody>
+                                <tr style="border:0;border-collapse:collapse;border-spacing:0;">
+                                    <td align="center" colspan="4" height="20" style="height:20px;width:464px;font-size:15px;" valign="middle"></td>
+                                </tr>
+                                <tr style="border:0;border-collapse:collapse;border-spacing:0;">
+                                    <td align="center" colspan="4" style="font-family:Helvetica, Arial, sans-serif;font-size:18px;color:#ffffff;" valign="middle">
+                                        Vous avez une question ? <br/>
+                                        Contactez votre Centre de Relation Adhérents
+                                    </td>
+                                </tr>
+                                <tr style="border:0;border-collapse:collapse;border-spacing:0;">
+                                    <td align="center" colspan="4" height="10" style="height:10px;width:464px;font-size:15px;" valign="middle"></td>
+                                </tr>
+                                <tr align="left" style="border:0;border-collapse:collapse;border-spacing:0;">
+                                    <td align="left" height="41" style="vertical-align:middle;width:32px;height:41px;min-height:41px;max-height:41px;font-size:15px;font-family:Helvetica, Arial, sans-serif;color:#ffffff;" valign="middle" width="32">
+                                        <a href="mailto:contact-fr@probusiness.michelingroup.com" style="vertical-align:middle; font-size:15px;height:41px;min-height:41px;max-height:41px;vertical-align:middle;color:#ffffff;text-decoration:none;display: block;">
+                                            <img alt="Email" height="20" src="{{ origin }}{% get_image 'logo-footer-mail' %}" style="display: block; line-height:15px;vertical-align:middle;width: 28px;height: 20px" width="28"/>
+                                        </a>
+                                    </td>
+                                    <td align="left" height="41" style="vertical-align:middle;width: 240px; height:41px;min-height:41px;max-height:41px;line-height:21px;font-size:15px;font-family:Helvetica, Arial, sans-serif;color:#ffffff;" valign="middle" width="240">
+                                        <a href="mailto:contact-fr@probusiness.michelingroup.com" style="font-size:11px;height:41px;min-height:41px;max-height:41px;vertical-align:middle;color:#ffffff;text-decoration:none;display: block;">
+                                            <span style="color:#ffffff">contact-fr@probusiness.michelingroup.com</span>
+                                        </a>
+                                    </td>
+                                    <td align="left" height="41" style="width:50px;height:41px;min-height:41px;max-height:41px;line-height:15px;font-size:15px;font-family:Helvetica, Arial, sans-serif;color:#ffffff;" valign="middle" width="50">
+                                        <a href="tel:+330428294748" style="display: block;font-size:15px;height:41px;min-height:41px;max-height:41px;vertical-align:middle;color:#ffffff;text-decoration:none;">
+                                            <img alt="Phone" height="34" src="{{ origin }}{% get_image 'logo-footer-phone' %}" style="display: block; line-height:41px; width: 36px;height: 34px" width="36"/>
+                                        </a>
+                                    </td>
+                                    <td align="left" height="41" style="vertical-align:bottom;width: 140px; height:41px;min-height:41px;max-height:41px;line-height:15px;font-size:15px;font-family:Helvetica, Arial, sans-serif;color:#ffffff;" valign="bottom" width="140">
+                                        <a href="tel:+330428294748" style="display: block;font-size:13px;height:41px;min-height:41px;max-height:41px;vertical-align:middle;color:#ffffff;text-decoration:none;">
+                                            04 28 29 47 48<br/>
+                                            <span style="font-size:7px;">(Appel non surtaxé, prix d’un appel local)</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr style="border:0;border-collapse:collapse;border-spacing:0;">
+                                    <td align="center" colspan="4" height="20" style="height:10px;width:464px;font-size:15px;" valign="middle"></td>
+                                </tr>
+                                <tr style="border:0;border-collapse:collapse;border-spacing:0;">
+                                    <td align="center" colspan="4" style="font-family:Helvetica, Arial, sans-serif;font-size:11px;color:#AEC5F7;line-height:12px;" valign="middle">
+                                        Une équipe est à votre disposition pour répondre à toute question liée à votre programme
+                                    </td>
+                                </tr>
+                                <tr style="border:0;border-collapse:collapse;border-spacing:0;">
+                                    <td align="center" colspan="4" height="20" style="height:20px;width:500px;font-size:15px;" valign="middle"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td align="left" style=" width: 68px" valign="top" width="68"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" class="all" style="border: 0; border-collapse: collapse; border-spacing: 0; margin: 0; min-width: 600px; padding: 0;background-color:#ffffff" width="600">
+                    <tbody>
+                    <tr align="left" style="border: 0; border-collapse: collapse; border-spacing: 0">
+                        <td align="center" height="44" style="width: 600px;height: 44px;line-height: 15px;text-align: center;font-weight: bold" valign="middle" width="288">
+                            <img alt="GROUPE MICHELIN" height="15" src="{{ origin }}{% get_image 'GROUPE-MICHELIN' %}" style="width:228px;height:15px;display: blockl;line-height: 15px" width="228"/>
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table align="center" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" class="all" style="border: 0; border-collapse: collapse; border-spacing: 0; margin: 0; min-width: 600px; padding: 0;background-color:#ffffff" width="600">
+                    <tbody>
+                    <tr style="border:0;border-collapse:collapse;border-spacing:0;">
+                        <td align="left" style=" width: 29px" valign="top" width="29"></td>
+                        <td align="center" style="width:542px;" valign="top">
+                            <table border="0" cellpadding="0" cellspacing="0" style="border:0;border-collapse:collapse;border-spacing:0;margin-top:0px !important;min-width:542px;padding-top:0px !important;">
+                                <tbody>
+                                <tr align="left" style="border:0;border-collapse:collapse;border-spacing:0;">
+                                    <td align="left" style="line-height:11px;mso-line-height-rule:exactly;font-size:10px;font-family:Helvetica, Arial, sans-serif;color:#C1C1C1;" valign="top" width="542">
+                                        Ce message vous est envoyé par Groupe Michelin, dans le cadre de votre adhésion au programme MICHELIN PRO BUSINESS, réservé aux réseaux de distribution
+                                        automobile ainsi qu’aux professionnels de l’entretien et réparation. Les informations qui y sont contenues sont en rapport avec votre activité professionnelle.
+                                        Il est automatique, merci de ne pas y répondre, votre réponse ne serait ni lue, ni traitée. Pour nous contacter, vous pouvez cliquer
+                                        <a href="mailto:contact-fr@probusiness.michelingroup.com" style="color: #004f9f; font-weight: bold;text-decoration: underline;">là</a>
+                                        .
+                                    </td>
+                                </tr>
+                                <tr style="border:0;border-collapse:collapse;border-spacing:0;">
+                                    <td align="center" height="10" style="height:10px" valign="middle"></td>
+                                </tr>
+                                <tr align="left" style="border:0;border-collapse:collapse;border-spacing:0;">
+                                    <td align="left" style="line-height:11px;mso-line-height-rule:exactly;font-size:10px;font-family:Helvetica, Arial, sans-serif;color:#C1C1C1;" valign="top" width="542">
+                                        Le Groupe Michelin s’engage à respecter les dispositions du règlement n° 2016/679, dit Règlement Général sur la Protection des Données (RGPD). Concernant la
+                                        durée de conservation de vos données personnelles, le Groupe Michelin vous informe qu’elle applique la recommandation de la Commission Nationale de
+                                        l’Informatique et des Libertés (CNIL) : 3 ans à compter du dernier contact. Vos données personnelles ne sont, en aucun cas, utilisées à d’autres fins que la
+                                        communication de nos actualités et de nos offres.
+                                    </td>
+                                </tr>
+                                <tr style="border:0;border-collapse:collapse;border-spacing:0;">
+                                    <td align="center" height="10" style="height:10px" valign="middle"></td>
+                                </tr>
+                                <tr align="left" style="border:0;border-collapse:collapse;border-spacing:0;">
+                                    <td align="left" style="line-height:11px;mso-line-height-rule:exactly;font-size:10px;font-family:Helvetica, Arial, sans-serif;color:#C1C1C1;" valign="top" width="542">
+                                        Conformément au RGPD, le Groupe Michelin vous rappelle que vous bénéficiez d'un droit d'accès, de rectification, d’opposition, de radiation et de portabilité
+                                        des informations vous concernant, ainsi que celui de demander la limitation de leur traitement. Vous pouvez exercer ces droits en écrivant à l’adresse email
+                                        suivante :
+                                        <a href="mailto:contact-fr@probusiness.michelingroup.com" style="color: #004f9f; text-decoration: underline;">contact-fr@probusiness.michelingroup.com</a>
+                                        par courrier à : Programme MICHELIN PRO BUSINESS – AIRDDM - A l’attention du Délégué à la Protection des Données – 55 ter Av. René Cassin – 69009 LYON (France),
+                                        accompagné d’une copie d’un titre d’identité. Vous disposez également du droit d’introduire une réclamation auprès d’une autorité de contrôle comme la CNIL.
+                                    </td>
+                                </tr>
+                                <tr style="border:0;border-collapse:collapse;border-spacing:0;">
+                                    <td align="center" height="10" style="height:10px" valign="middle"></td>
+                                </tr>
+                                <tr align="left" style="border:0;border-collapse:collapse;border-spacing:0;">
+                                    <td align="left" style="line-height:11px;mso-line-height-rule:exactly;font-size:10px;font-family:Helvetica, Arial, sans-serif;color:#C1C1C1;" valign="top" width="542">
+                                        Si vous ne désirez plus recevoir d’e-mail de la part du programme MICHELIN PRO BUSINESS, vous pouvez vous désabonner
+                                        <a href="{{ unsubscribe_url }}" style="color: #004f9f; font-weight: bold;text-decoration: underline;">ici</a>
+                                        .
+                                    </td>
+                                </tr>
+                                <tr style="border:0;border-collapse:collapse;border-spacing:0;">
+                                    <td align="center" height="10" style="height:10px" valign="middle"></td>
+                                </tr>
+                                <tr align="left" style="border:0;border-collapse:collapse;border-spacing:0;">
+                                    <td align="left" style="line-height:11px;mso-line-height-rule:exactly;font-size:10px;font-family:Helvetica, Arial, sans-serif;color:#C1C1C1;" valign="top" width="542">
+                                        © Programme MICHELIN PRO BUSINESS – Groupe Michelin 2024. Tous droits réservés.
+                                    </td>
+                                </tr>
+                                <tr style="border:0;border-collapse:collapse;border-spacing:0;">
+                                    <td align="center" height="20" style="height:20px;width:542px;font-size:15px;" valign="middle"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td align="left" style=" width: 29px" valign="top" width="29"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </td>
+    </tr>
+    <tr style="border:0;border-collapse:collapse;border-spacing:0;">
+        <td align="center" height="50" style="height:50px;" valign="middle"></td>
+    </tr>
+</table>
+</body>
+</html>
